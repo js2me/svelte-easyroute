@@ -1,17 +1,17 @@
-<div class="router-link" on:click={navigateRouter}>
-<a href={(window.routermode == 'hash' ? '/#' : '')+to} on:click={preventClickLink}>
-{#if text && text !== ""}
-{text}
-{/if}
-<slot></slot>
+<a href={(window.routermode == 'hash' ? '/#' : '')+to} on:click={handleOnClickLink} class="{className}">
+    {#if text && text !== ""}
+        {text}
+    {/if}
+    <slot></slot>
 </a>
-</div>
 
 <script>
     export let to
     export let text
+    export let className
+    export let activeClassName
 
-    function preventClickLink(e) {
+    function handleOnClickLink(e) {
         e.preventDefault()
         e.stopPropagation()
         navigateRouter()
@@ -37,12 +37,3 @@
         }
     }
 </script>
-
-<style>
-    div.router-link {
-        color: blue;
-        text-decoration: underline;
-        cursor: pointer;
-        display: inline-block;
-    }
-</style>
